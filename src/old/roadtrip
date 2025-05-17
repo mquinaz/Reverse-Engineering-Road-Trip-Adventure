@@ -1,0 +1,28 @@
+get BIN_SIZE asize
+get FOLDER basename
+math i = 1 
+for i
+   get OFFSET long
+   savepos TMP
+   if OFFSET == BIN_SIZE
+      break
+   endif
+   get NEXT_OFFSET long
+   xmath SIZE "NEXT_OFFSET - OFFSET" 
+   math tempOfs = OFFSET
+   math tempOfs + 2
+   goto tempOfs
+   get type SHORT
+   If type == 0x1012
+      string NAME p "%s\%d_tex.dat" FOLDER i
+   #You can continue to add other types here, according to your needs. 
+   #Elif type == 0x1000
+   #   string NAME p "%s\%d_xxx.dat" FOLDER i
+   #Elif type == 0xXXXX
+   #   string NAME p "%s\%d_xxxx.mod" FOLDER i      
+   Else
+      string NAME p "%s\%d.dat" FOLDER i
+   Endif
+   log NAME OFFSET SIZE
+   goto TMP
+next i
