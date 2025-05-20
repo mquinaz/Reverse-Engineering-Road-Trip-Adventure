@@ -36,9 +36,20 @@ void File::read(std::vector<uint8_t> &data, uint32_t size)
     f->read(reinterpret_cast<char*>(data.data()), size); 
 }  
 
-void File::seek(uint32_t offset)
+uint32_t File::readUint() 
+{ 
+    std::vector<uint8_t> data(4);
+    f->read(reinterpret_cast<char*>(data.data()), 4); 
+
+    return intLittleEndian(data, 0, 4);
+}   
+
+void File::seek(int32_t offset, uint8_t mode)
 {
-    f->seekg(offset, std::ios::beg);
+    if(mode == 1)
+        f->seekg(offset, std::ios::cur);
+    else
+        f->seekg(offset, std::ios::beg);
 }
 
 bool File::isOpen() 
