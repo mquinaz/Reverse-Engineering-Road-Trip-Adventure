@@ -101,6 +101,8 @@ Each texture file have a 70 byte header:
 - 4 byte padding
 - ...
 
+After each header we have chunks of data without any palletted information, meaning RGBA each pixel color component is 1 byte, so for each pixel we have 32 bits.
+
 ![roadTripMap](https://github.com/user-attachments/assets/aef85bba-9905-4e7d-b477-271e2740d4fb)
 
 
